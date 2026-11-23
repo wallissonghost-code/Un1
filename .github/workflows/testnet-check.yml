@@ -1,0 +1,16 @@
+name: Verificar Binance Spot Testnet
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  testnet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar conta de teste sem enviar ordens
+        env:
+          BINANCE_TESTNET_API_KEY: ${{ secrets.BINANCE_TESTNET_API_KEY }}
+          BINANCE_TESTNET_API_SECRET: ${{ secrets.BINANCE_TESTNET_API_SECRET }}
+        run: python3 scripts/testnet_check.py
